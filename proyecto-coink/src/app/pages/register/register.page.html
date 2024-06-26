@@ -1,0 +1,165 @@
+<ion-header *ngIf="paso1 || paso2 || paso3">
+  <ion-toolbar color="light" class="ion-text-center">
+    <ion-button fill="clear" slot="start" routerLink="/home">
+      <ion-icon name="chevron-back-outline" color="primary"></ion-icon>
+    </ion-button>
+    <ion-title class="title ion-text-uppercase" color="secondary">{{ title }}</ion-title>
+    <ion-img src="{{paso}}" class="paso"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" *ngIf="paso1">
+    <ion-card>
+      <ion-card-header>
+        <ion-item color="light" lines="none" class="ion-no-padding">
+          <ion-thumbnail slot="start">
+            <img src="assets/img/oink.svg" />
+          </ion-thumbnail>
+          <ion-label color="dark">Para comenzar, por favor<br>ingresa <strong>tu número de celular</strong></ion-label>
+        </ion-item>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="none" class="input">
+          <ion-input type="tel" placeholder="(XXX - XXXXXXX)" [clearInput]="true" [counter]="false"
+          maxlength="10"
+          [counterFormatter]="customCounterFormatter" enterkeyhint="enter" (keyup.enter)="datCuenta()" #tel name="tel" [(ngModel)]="form.tel"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<ion-content color="light" *ngIf="paso2" class="paso2">
+  <ion-card>
+    <ion-card-header class="ion-no-padding">
+      <ion-item color="light" lines="none" class="ion-no-padding">
+        <ion-thumbnail slot="start">
+          <img src="assets/img/oink.svg" />
+        </ion-thumbnail>
+        <ion-label color="dark">Ahora necesitamos saber<br>algunos datos tuyos</ion-label>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label color="secondary"><strong>Documento de identidad</strong></ion-label><br>
+
+      <ion-select label="Tipo de documento" mode="ios" label-placement="floating" #tipo name="tipo" [(ngModel)]="form.tipo" required>
+        <ion-select-option value="{{t.notation}}" *ngFor="let t of documents" >{{ t.description }}</ion-select-option>
+      </ion-select>
+
+      <ion-input type="number" label="Número de documento" label-placement="floating" [counter]="false" maxlength="10" #ntipo name="ntipo" required [(ngModel)]="form.ntipo"></ion-input>
+
+      <ion-input type="date" label="Fecha de expedición del documento" label-placement="floating" #ftipo name="ftipo" required [(ngModel)]="form.ftipo"></ion-input>
+
+      <ion-input type="date" label="Fecha de nacimiento" label-placement="floating" #fnac name="fnac" required [(ngModel)]="form.fnac"></ion-input>
+    
+      <ion-select label="Género" mode="ios" label-placement="floating" #gen name="gen" required [(ngModel)]="form.gen">
+        <ion-select-option value="m">Masculino</ion-select-option>
+        <ion-select-option value="f">Femenino</ion-select-option>
+      </ion-select>
+      <br>
+
+      <ion-label color="secondary"><strong>Configura tu cuenta</strong></ion-label><br>
+
+        <ion-input type="email" label="Correo electrónico" label-placement="floating" #email name="email" required (ionChange)="validarEmail(  )" [(ngModel)]="form.email"></ion-input>
+
+        <ion-input type="email" label="Confirmar correo electrónico" label-placement="floating" #conemail name="conemail" required (ionChange)="validarEmail()" [(ngModel)]="form.conemail"></ion-input>
+        <ion-label color="danger"><small>{{ erremail }}</small></ion-label>
+
+        <ion-input type="password" label="Pin de seguridad" label-placement="floating" #pin  required (ionChange)="validarPin(  )" [(ngModel)]="form.pin"></ion-input>
+
+        <ion-input type="password" label="Confirmar pin de seguridad" label-placement="floating" #conpin  required (ionChange)="validarPin( )" [(ngModel)]="form.conpin"></ion-input>
+        <ion-label color="danger"><small>{{ errpin }}</small></ion-label>
+    </ion-card-content><br>
+
+    <ion-button (click)="terms()" expand="block" fill="solid" shape="round" color="primary" 
+      [disabled]="
+      !form.tipo ||
+      !form.ntipo ||
+      !form.ftipo ||
+      !form.fnac  ||
+      !form.gen ||
+      !form.email ||
+      !form.conemail ||
+      !form.pin ||
+      !form.conpin ||
+      !valemail || !valpin">
+      Siguiente
+    </ion-button>
+  </ion-card>
+</ion-content>
+
+<ion-content color="light" *ngIf="paso3" class="paso3">
+  <ion-card>
+    <ion-card-header class="ion-no-padding">
+      <ion-item color="light" lines="none" class="ion-no-padding">
+        <ion-thumbnail slot="start">
+          <img src="assets/img/oinkPolicia.svg"  style="height: 65px;"/>
+        </ion-thumbnail>
+        <ion-label class="item-paso3">
+          <h4 class="ion-text-uppercase">estas muy cerca de<br>ser parte de coink.</h4>
+          <p color="dark">Solo es necesario que leas detenidamente el contrato que se encuentra al final de esta pantalla y lo aceptes.</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label color="secondary" class="ion-text-uppercase title"><strong>lo mas importante</strong></ion-label><br><br>
+      <p class="p-terms">
+        Para la apertura del Depósito de Bajo Monto en COINK debes ser una persona natural que de acuerdo con nuestra legislación vigente te encuentres en plena capacidad para adquirir derechos y contraer obligaciones.<br><br> 
+        Abrirás una cuenta COINK de Bajo Monto la cual te permitirá tener un saldo hasta por 8 salarios mínimos en el mes y realizar débitos por el mismo valor. Si deseas sobrepasar estos límites debes solicitarnos la apertura de un Depósito Ordinario COINK Persona Natural.<br><br>
+        Solo puedes tener una cuenta COINK de Bajo Monto y podrás utilizar tu dispositivo móvil para consultar tu saldo, tus movimientos, realizar tus transacciones y administrar tu cuenta.<br><br>
+        Recuerda que no necesitas saldo mínimo ni monto inicial para su apertura.
+      </p>
+      <br><br>
+      <ion-label color="secondary" class="ion-text-uppercase"><strong>Lee tu contrato</strong></ion-label><br><br>
+      <ion-label><ion-checkbox #check name="check"></ion-checkbox> He leído y acepto el contrato</ion-label>
+    </ion-card-content><br>
+
+    <ion-button (click)="registrarse( )" expand="block" fill="solid" shape="round" color="primary" [disabled]="!check">
+      Aceptar
+    </ion-button>
+
+  </ion-card>
+</ion-content>
+
+<ion-content class="ion-padding" color="medium" *ngIf="modal">
+  <ion-card class="modal ion-padding ion-text-center">
+    <ion-card-header class="no-border">
+      <ion-img src="assets/img/marranoRegalo.svg"></ion-img><br>
+      <ion-card-title color="secondary">¡Bienvenido a Coink!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="modal-p">
+      ¡Cuenta creada exitosamente, tu marrano ya está listo para que empieces a ahorrar!
+    </ion-card-content>
+    <ion-button (click)="aceptar()" expand="block" fill="solid" shape="round" color="primary">
+      Continuar
+    </ion-button>
+  </ion-card>
+</ion-content>
+
+<ion-content color="light" *ngIf="registrado" class="paso4">
+  <ion-card>
+    <ion-card-header>
+      <ion-item color="light" lines="none" class="ion-no-padding">
+        <ion-thumbnail slot="start">
+          <img src="assets/img/oink.svg" />
+        </ion-thumbnail>
+        <ion-label color="dark">¡El usuario ha sido registrado exitosamente!</ion-label>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-input type="text" label="Teléfono registrado" labelPlacement="floating" value="{{ form.tel }}"></ion-input>
+      <ion-input type="text" label="Tipo de documento" labelPlacement="floating" value="{{ form.tipo }}"></ion-input>
+      <ion-input type="text" label="Fecha expedición de documento" labelPlacement="floating" value="{{ form.ftipo }}"></ion-input>
+      <ion-input type="text" label="Fecha de nacimiento" labelPlacement="floating" value="{{ form.fnac }}"></ion-input>
+      <ion-input type="text" label="Email" labelPlacement="floating" value="{{ form.email }}"></ion-input>
+      <ion-input type="password" label="Pin de seguridad" labelPlacement="floating" value="{{ form.pin }}"></ion-input>
+      <br>
+      <ion-button routerLink="/home" expand="block" fill="solid" shape="round" color="primary">
+        Registrar otro usuario
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

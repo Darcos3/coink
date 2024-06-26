@@ -1,0 +1,87 @@
+.title {
+    font-family: 'Montserrat-Bold';
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.paso {
+    width: 250px;
+    height: 16px;
+    margin: 0 auto;
+}
+
+ion-card {
+    --background: var(--ion-color-light);
+    box-shadow: none;
+}
+
+ion-card-header {
+    border-bottom: 2px solid var(--ion-color-primary);
+}
+
+ion-card-content {
+    margin-top: 10%;
+}
+
+ion-item ion-label {
+    font-family: 'AvenirLTStd-Roman';
+    font-size:16px;
+    color: var(--ion-color-medium);
+}
+
+.input {
+    --background: #f2f2f2;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: 'AvenirLTStd-Roman';
+}
+
+.paso2 ion-select,
+.paso2 ion-input {
+    --background: #ffffff;
+    color: var(--ion-color-medium);
+    font-family: 'AvenirLTStd-Book';
+    font-size: 13px;
+    border-bottom: 1px solid var(--ion-color-medium);
+}
+
+.item-paso3 h4 {
+    font-family: 'Montserrat-Bold';
+    color: var(--ion-color-secondary);
+}
+
+.p-terms {
+    font-family: 'AvenirLTStd-Roman';
+    font-size: 14px !important;
+    color: #323232;
+}
+
+.modal {
+    margin-top: 20%;
+    border-radius: 10px;
+}
+
+.no-border {
+    border-bottom: none !important;
+}
+
+.no-border ion-img {
+    width: 120px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.no-border ion-card-title {
+    font-family: 'Montserrat-Bold';
+    font-size: 20px;
+}
+
+.modal-p {
+    font-family: 'AvenirLTStd-Roman';
+    color: #212121;
+    font-size: 16px;
+}
+
+ion-button {
+    font-family: 'Montserrat-Bold';
+}

@@ -1,0 +1,47 @@
+
+
+ion-card {
+    background-color: var(--ion-color-light);
+    text-align: center;
+    box-shadow: none;
+}
+
+ion-card-header {
+    margin-top: 15%;
+}
+
+.logo {
+    width: 154px;
+    height: 144px;
+    margin: 0 auto;
+}
+
+ion-card-subtitle {
+    color: var(--ion-color-primary);
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: 'Montserrat-Bold';
+}
+
+ion-card-content {
+    margin-top: 30%;
+}
+
+ion-button {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.register {
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-secondary);
+    font-family: 'Montserrat-Bold' !important;
+    font-size: 16px;
+}
+
+.login {
+    --background: #004B40 !important;
+    color: var(--ion-color-light) !important;
+    font-family: 'Montserrat-SemiBold' !important;
+    font-size: 16px;
+}
